@@ -5,7 +5,7 @@
       :data="tableData"
       v-bind="$attrs"
       v-on="$listeners"
-      style="width: 100%"
+      style="width: 100%;"
     >
       <template v-for="(item, index) in tableHeader">
         <el-table-column
@@ -60,8 +60,8 @@ export default {
 }
 .el-table {
   table {
-    border-collapse: collapse;
     margin: 0;
+    border-collapse: collapse;
   }
 
   th,

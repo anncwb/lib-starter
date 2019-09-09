@@ -8,7 +8,7 @@
     "lib": "cross-env NODE_ENV=production rimraf ./lib && node ./build/rollup.build",
     "lint": "vue-cli-service lint",
     "lint:prettier": "cross-env prettier --write \"src/**/*.js\" \"src/**/*.vue\" --loglevel warn",
-    "lint:css": "cross-env stylelint 'src/**/*.{html,vue,css,less,scss,styl}' --fix",
+    "lint:css": "cross-env  stylelint 'packages/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'examples/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'src/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'docs/.vuepress/**/*.{html,vue,css,less,scss,styl}' --fix",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "docs:dev": "vuepress dev docs",
@@ -88,13 +88,32 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,vue}": [
+    "src/**/*.{js}": [
       "prettier --write",
       "eslint --fix",
       "git add"
     ],
-    "src/**/*.{html,vue,css,less,scss,styl}": [
+    "packages/**/*.{js,jsx,vue}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "pageages/**/*.{html,vue,css,less,scss,styl}": [
       "stylelint --fix",
+      "git add"
+    ],
+    "examples/**/*.{js,jsx,vue}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "examples/**/*.{html,vue,css,less,scss,styl}": [
+      "stylelint --fix",
+      "git add"
+    ],
+    "docs/**/*.{js,jsx,vue}": [
+      "prettier --write",
+      "eslint --fix",
       "git add"
     ]
   }

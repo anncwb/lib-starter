@@ -37,8 +37,8 @@ export default {
 .demo-block {
   .desc {
     font-size: 14px;
-    color: #5e6d82;
     line-height: 1.5em;
+    color: #5e6d82;
   }
 }
 </style>

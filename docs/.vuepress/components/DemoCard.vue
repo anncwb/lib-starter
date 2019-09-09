@@ -49,10 +49,10 @@ export default {
 <style lang="less" scoped>
 .demo-card {
   margin-bottom: 24px;
+  cursor: pointer;
   border: 1px solid #ebebeb;
   border-radius: 3px;
   transition: 0.2s;
-  cursor: pointer;
   &:hover {
     box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6), 0 2px 4px 0 rgba(232, 237, 250, 0.5);
   }
@@ -64,24 +64,24 @@ export default {
     background-color: #fafafa;
     transition: 0.2s;
     &-desc {
-      font-size: 13px;
-      margin-bottom: 20px;
       padding: 10px;
+      margin-bottom: 20px;
+      font-size: 13px;
       background-color: #fff;
     }
   }
   .action {
-    border-top: 1px solid #eaeefb;
     height: 48px;
-    line-height: 48px;
-    box-sizing: border-box;
-    background-color: #fff;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    text-align: center;
     margin-top: -1px;
+    line-height: 48px;
     color: #409eff;
+    text-align: center;
     cursor: pointer;
+    background-color: #fff;
+    border-top: 1px solid #eaeefb;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    box-sizing: border-box;
     .open {
       float: right;
       margin-right: 30px;
