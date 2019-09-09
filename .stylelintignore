@@ -1,0 +1,12 @@
+*.js
+*.png
+*.eot
+*.ttf
+*.woff
+
+/src/assets/fonts/
+/src/assets/less/mixins
+/src/assets/less/elementui-reset.less
+/dist/
+/public/
+.output.js
