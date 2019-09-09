@@ -1832,7 +1832,7 @@ ansi-styles@^2.2.1:
   resolved "https://registry.npm.taobao.org/ansi-styles/download/ansi-styles-2.2.1.tgz?cache=0&sync_timestamp=1566431369422&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fansi-styles%2Fdownload%2Fansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
   integrity sha1-tDLdM1i2NM914eRmQ2gkBTPB3b4=
 
-ansi-styles@^3.2.0, ansi-styles@^3.2.1:
+ansi-styles@^3.1.0, ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npm.taobao.org/ansi-styles/download/ansi-styles-3.2.1.tgz?cache=0&sync_timestamp=1566431369422&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fansi-styles%2Fdownload%2Fansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   integrity sha1-QfuyAkPlCxK+DwS43tvwdSDOhB0=
@@ -2938,6 +2938,15 @@ center-align@^0.1.1:
   dependencies:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
+
+chalk@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/chalk/download/chalk-2.3.0.tgz#b5ea48efc9c1793dccc9b4767c93914d3f2d52ba"
+  integrity sha1-tepI78nBeT3MybR2fJORTT8tUro=
+  dependencies:
+    ansi-styles "^3.1.0"
+    escape-string-regexp "^1.0.5"
+    supports-color "^4.0.0"
 
 chalk@2.3.1:
   version "2.3.1"
@@ -6204,6 +6213,11 @@ has-flag@^1.0.0:
   resolved "https://registry.npm.taobao.org/has-flag/download/has-flag-1.0.0.tgz#9d9e793165ce017a00f00418c43f942a7b1d11fa"
   integrity sha1-nZ55MWXOAXoA8AQYxD+UKnsdEfo=
 
+has-flag@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/has-flag/download/has-flag-2.0.0.tgz#e8207af1cc7b30d446cc70b734b5e8be18f88d51"
+  integrity sha1-6CB68cx7MNRGzHC3NLXovhj4jVE=
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/has-flag/download/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
@@ -8290,6 +8304,11 @@ lodash.once@^4.1.1:
   resolved "https://registry.npm.taobao.org/lodash.once/download/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
   integrity sha1-DdOXEhPHxW34gJd9UEyI+0cal6w=
 
+lodash.padend@4.6.1:
+  version "4.6.1"
+  resolved "https://registry.npm.taobao.org/lodash.padend/download/lodash.padend-4.6.1.tgz#53ccba047d06e158d311f45da625f4e49e6f166e"
+  integrity sha1-U8y6BH0G4VjTEfRdpiX05J5vFm4=
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.npm.taobao.org/lodash.sortby/download/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -8324,6 +8343,11 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.npm.taobao.org/lodash.uniq/download/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
+
+lodash@4.17.11:
+  version "4.17.11"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  integrity sha1-s56mIp72B+zYniyN8SU2iRysm40=
 
 lodash@4.17.14:
   version "4.17.14"
@@ -8698,6 +8722,19 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/methods/download/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
+
+microargs@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npm.taobao.org/microargs/download/microargs-1.1.2.tgz#725fbedcf120db12317d3eda534d3f19af867733"
+  integrity sha1-cl++3PEg2xIxfT7aU00/Ga+GdzM=
+
+microcli@1.3.3:
+  version "1.3.3"
+  resolved "https://registry.npm.taobao.org/microcli/download/microcli-1.3.3.tgz#27f1b330b0f935be6314f298972105a325f731e7"
+  integrity sha1-J/GzMLD5Nb5jFPKYlyEFoyX3Mec=
+  dependencies:
+    lodash "4.17.11"
+    microargs "1.1.2"
 
 micromatch@^2.3.11:
   version "2.3.11"
@@ -9359,6 +9396,11 @@ obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/obuf/download/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha1-Cb6jND1BhZ69RGKS0RydTbYZCE4=
+
+omelette@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.npm.taobao.org/omelette/download/omelette-0.4.5.tgz#f16bc477b7e263b59796a65661964e4762e9ae74"
+  integrity sha1-8WvEd7fiY7WXlqZWYZZOR2LprnQ=
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -11887,6 +11929,16 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
+runjs@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.npm.taobao.org/runjs/download/runjs-4.4.2.tgz#3adf5b53ad1b119b846b3cae1334e9ab7ff34920"
+  integrity sha1-Ot9bU60bEZuEazyuEzTpq3/zSSA=
+  dependencies:
+    chalk "2.3.0"
+    lodash.padend "4.6.1"
+    microcli "1.3.3"
+    omelette "0.4.5"
+
 rx-lite-aggregates@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npm.taobao.org/rx-lite-aggregates/download/rx-lite-aggregates-4.0.8.tgz#753b87a89a11c95467c4ac1626c4efc4e05c67be"
@@ -12840,6 +12892,13 @@ supports-color@^3.1.2, supports-color@^3.2.3:
   integrity sha1-ZawFBLOVQXHYpklGsq48u4pfVPY=
   dependencies:
     has-flag "^1.0.0"
+
+supports-color@^4.0.0:
+  version "4.5.0"
+  resolved "https://registry.npm.taobao.org/supports-color/download/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
+  integrity sha1-vnoN5ITexcXN34s9WRJQRJEvY1s=
+  dependencies:
+    has-flag "^2.0.0"
 
 svg-tags@^1.0.0:
   version "1.0.0"

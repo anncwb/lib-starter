@@ -12,10 +12,10 @@ const cssnano = require('cssnano')
 const simplevars = require('postcss-simple-vars')
 const nested = require('postcss-nested')
 const cssnext = require('postcss-cssnext')
-const { getAssetsPath, env, resolve: pathResolve } = require('./utils')
+const { getAssetsPath, env, chalkConsole } = require('./utils')
 const { externalMap } = require('../config/rollup.build.config')
 const aliasConfig = require('../config/alias')
-
+const chalk = require('chalk')
 function createPlugins({ min, moduleName } = {}) {
   const exclude = 'node_modules/**'
   const plugins = [
@@ -30,7 +30,7 @@ function createPlugins({ min, moduleName } = {}) {
       }
     }),
     resolve({
-      extensions: ['.js', '.vue']
+      extensions: aliasConfig.resolve
     }),
     babel({
       runtimeHelpers: true,
@@ -71,7 +71,8 @@ function createPlugins({ min, moduleName } = {}) {
  * 打包
  * @param {*} config
  */
-async function build(config) {
+let buildCount = 0
+async function build(config, index, arr) {
   const { min, output, suffix, input, format, moduleName } = config
 
   const inputOptions = {
@@ -88,7 +89,10 @@ async function build(config) {
     globals: externalMap
   }
   const bundle = await rollup.rollup(inputOptions)
-  await bundle.write(outOptions)
+  bundle.write(outOptions).then(() => {
+    chalkConsole.building(buildCount, arr.length)
+    ++buildCount == arr.length && chalkConsole.success()
+  })
 }
 module.exports = {
   build

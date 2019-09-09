@@ -1,17 +1,17 @@
 const fs = require('fs')
 const { formatTypeList, addons } = require('../config/rollup.build.config.js')
-const libList = require('../config/rollup.lib.list.config')
+const libList = require('../config/lib.list.config')
 const { build } = require('./rollup.createConfig')
 const { resolve } = require('./utils')
-let pkg = []
+fs.mkdirSync(resolve())
 
-formatTypeList.forEach(({ format, min, suffix }) => {
+let pkg = []
+formatTypeList.forEach(({ format, min, suffix } = {}) => {
   Object.keys(libList).forEach((moduleName) => {
     const { input, output } = libList[moduleName]
-    pkg.push({ min, format, suffix, moduleName, input, output: `${format}/${output}` })
+    pkg.push({ min, format, suffix, moduleName, input, output: `${output}` })
   })
 })
 pkg = pkg.concat(addons)
-pkg.forEach(build)
 
-fs.mkdirSync(resolve())
+pkg.forEach(build)

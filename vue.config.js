@@ -9,8 +9,8 @@ const setAlias = (config) => {
 }
 module.exports = {
   lintOnSave: !utils.isProduct,
-  runtimeCompiler: true, // 是否使用包含运行时编译器的 Vue 构建版本
-  productionSourceMap: false, // 不在production环境使用SourceMap
+  runtimeCompiler: true,
+  productionSourceMap: false,
   pages: {
     index: {
       entry: 'examples/main.js',
@@ -29,11 +29,6 @@ module.exports = {
   chainWebpack: (config) => {
     // 设置别名
     setAlias(config)
-    // config.resolve.alias
-    //   .set('@', utils.resolve('../src'))
-    //   .set('@p', utils.resolve('../packages'))
-    //   .set('@e', utils.resolve('../examples'))
-
     // 关闭利用空余带宽加载文件 提升首页速度
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
