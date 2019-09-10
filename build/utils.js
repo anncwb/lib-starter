@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const { outputPath } = require('../config/index')
 const chalk = require('chalk')
 
@@ -20,5 +21,13 @@ module.exports = {
     building: (index, total) => {
       console.log(chalk.blue(`正在打包第${index}/${total}个库`))
     }
+  },
+  fsExistsSync: (_path) => {
+    try {
+      fs.accessSync(_path, fs.F_OK)
+    } catch (e) {
+      return false
+    }
+    return true
   }
 }

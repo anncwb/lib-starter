@@ -2,9 +2,10 @@ const fs = require('fs')
 const { formatTypeList, addons } = require('../config/rollup.build.config.js')
 const libList = require('../config/lib.list.config')
 const { build } = require('./rollup.createConfig')
-const { resolve } = require('./utils')
-fs.mkdirSync(resolve())
+const { resolve, getAssetsPath } = require('./utils')
 
+fs.mkdirSync(resolve())
+fs.mkdirSync(getAssetsPath('./es'))
 let pkg = []
 formatTypeList.forEach(({ format, min, suffix } = {}) => {
   Object.keys(libList).forEach((moduleName) => {

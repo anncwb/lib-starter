@@ -1,5 +1,5 @@
 import FileHandle from '../packages/file-handle/index'
-
+import './index.css'
 const components = [FileHandle]
 const install = function(Vue) {
   components.forEach((component) => {

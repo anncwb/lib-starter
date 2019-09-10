@@ -9,3 +9,8 @@ export default {
   name: 'FileHandle'
 }
 </script>
+<style scoped>
+.body {
+  background: blue;
+}
+</style>

@@ -8,36 +8,33 @@ const replace = require('rollup-plugin-replace')
 const json = require('rollup-plugin-json')
 const postcss = require('rollup-plugin-postcss')
 const alias = require('rollup-plugin-alias')
+const filesize = require('rollup-plugin-filesize')
 const cssnano = require('cssnano')
 const simplevars = require('postcss-simple-vars')
 const nested = require('postcss-nested')
 const cssnext = require('postcss-cssnext')
-const { getAssetsPath, env, chalkConsole } = require('./utils')
+const { getAssetsPath, env, fsExistsSync } = require('./utils')
 const { externalMap } = require('../config/rollup.build.config')
 const aliasConfig = require('../config/alias')
-const chalk = require('chalk')
-function createPlugins({ min, moduleName } = {}) {
+const fs = require('fs')
+
+function createPlugins({ min } = {}) {
   const exclude = 'node_modules/**'
   const plugins = [
     commonjs(),
     vue({
-      css: false,
-      compileTemplate: true,
-      htmlMinifier: {
-        customAttrSurround: [[/@/, new RegExp('')], [/:/, new RegExp('')]],
-        collapseWhitespace: true,
-        removeComments: true
-      }
+      css: false
     }),
+    json(),
+    filesize(),
     resolve({
       extensions: aliasConfig.resolve
     }),
-    babel({
-      runtimeHelpers: true,
-      // 只编译我们的源代码
-      exclude
-    }),
-    json(),
+    // babel({
+    //   runtimeHelpers: true,
+    //   // 只编译我们的源代码
+    //   exclude
+    // }),
     postcss({
       plugins: [simplevars(), nested(), cssnext({ warnForDuplicates: false }), cssnano()],
       use: [
@@ -49,8 +46,9 @@ function createPlugins({ min, moduleName } = {}) {
         ]
       ],
       inject: false,
+      // sourceMap: true,
       extensions: ['.css', '.less'],
-      extract: getAssetsPath(`/styles/${moduleName || ''}/index.css`) // 输出路径
+      extract: true // 输出路径
     }),
     replace({
       exclude,
@@ -71,28 +69,47 @@ function createPlugins({ min, moduleName } = {}) {
  * 打包
  * @param {*} config
  */
-let buildCount = 0
+// let buildCount = 0
 async function build(config, index, arr) {
-  const { min, output, suffix, input, format, moduleName } = config
+  const { output, suffix, input, format, moduleName } = config
 
   const inputOptions = {
     input,
     external: Object.keys(externalMap),
-    plugins: createPlugins({ min, moduleName })
+    plugins: createPlugins(config)
   }
-
-  const file = getAssetsPath(output + suffix)
+  const fullName = output + suffix
+  const file = getAssetsPath(fullName)
   const outOptions = {
+    // dir: getAssetsPath(),
     file,
     format,
     name: moduleName,
+    // exports: 'named',
     globals: externalMap
+    // entryFileNames: file
   }
   const bundle = await rollup.rollup(inputOptions)
-  bundle.write(outOptions).then(() => {
-    chalkConsole.building(buildCount, arr.length)
-    ++buildCount == arr.length && chalkConsole.success()
-  })
+  let { output: outputData } = await bundle.generate(outOptions)
+
+  write({ output: outputData, fileName: output, format, fullName, file })
+}
+
+const isEs = (fmt) => fmt === 'es'
+async function write({ output, file, fileName, format, fullName } = {}) {
+  for (const { isAsset, code, source } of output) {
+    if (isAsset) {
+      const cssFileName = `${fileName}.css`
+      const filePath = isEs(format)
+        ? getAssetsPath(`/es/${cssFileName}`)
+        : getAssetsPath(cssFileName)
+
+      !fsExistsSync(filePath) && fs.writeFileSync(filePath, source.toString())
+    } else {
+      const filePath = isEs(format) ? getAssetsPath(`/es/${fullName}`) : file
+      fs.writeFileSync(filePath, code)
+    }
+  }
 }
 module.exports = {
   build

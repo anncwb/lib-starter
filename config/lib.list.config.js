@@ -1,9 +1,5 @@
 module.exports = {
-  main: {
-    input: 'src/index.js',
-    output: 'main'
-  },
-  fileHandle: {
+  'file-handle': {
     input: 'packages/file-handle/index.js',
     output: 'file-handle'
   }

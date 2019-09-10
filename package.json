@@ -15,7 +15,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "precommit": "lint-staged",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "pub": "npm run lib && npm publish"
   },
   "dependencies": {},
   "devDependencies": {
@@ -33,6 +34,7 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "@vuepress/plugin-back-to-top": "^1.0.4",
     "@vuepress/plugin-medium-zoom": "^1.0.4",
+    "autoprefixer": "^9.6.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^23.6.0",
@@ -60,6 +62,7 @@
     "rollup-plugin-alias": "^2.0.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",

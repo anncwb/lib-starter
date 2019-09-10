@@ -19,6 +19,7 @@ module.exports = {
     }
   },
   css: {
+    extract: utils.isProduct,
     loaderOptions: {
       less: {
         javascriptEnabled: true
