@@ -1,5 +1,6 @@
 const utils = require('./build/utils.js')
 const aliasConfig = require('./config/alias')
+const { externalMap } = require('./config/index')
 
 const setAlias = (config) => {
   const { alias } = aliasConfig
@@ -44,10 +45,29 @@ module.exports = {
       .tap((options) => {
         return options
       })
+    config.when(utils.isProduct, (config) => {
+      // 开启图片压缩
+      config.module
+        .rule('images')
+        .use('image-webpack-loader')
+        .loader('image-webpack-loader')
+        .options({
+          bypassOnDebug: true
+        })
+        .end()
+    })
+  },
+  configureWebpack: (config) => {
+    config.externals = externalMap
   },
   devServer: {
-    // 跨域
-    port: 8099 // 端口号
+    // 端口号
+    port: 8099,
+    // eslint报错页面会被遮住
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   },
   pluginOptions: {
     lintStyleOnBuild: true,

@@ -1,11 +1,17 @@
 <template>
   <div class="hello">
-    <FileHandle />
+    {{ message }}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld'
+  name: 'HelloWorld',
+  props: {
+    message: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>

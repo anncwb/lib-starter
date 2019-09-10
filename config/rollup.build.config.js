@@ -1,8 +1,6 @@
 module.exports = {
   esDir: 'es',
-  externalMap: {
-    vue: 'Vue'
-  },
+
   formatTypeList: [
     { format: 'cjs', min: false, suffix: '.common.js' },
     // { format: 'cjs', min: true, suffix: '.common.min.js' },
@@ -19,12 +17,12 @@ module.exports = {
     //   input: 'src/index.js',
     //   output: 'index'
     // },
-    {
-      min: false,
-      format: 'cjs',
-      suffix: '.js',
-      input: 'src/index.js',
-      output: 'index'
-    }
+    // {
+    //   min: false,
+    //   format: 'cjs',
+    //   suffix: '.js',
+    //   input: 'src/index.js',
+    //   output: 'index'
+    // }
   ]
 }

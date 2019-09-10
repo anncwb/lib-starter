@@ -16,9 +16,9 @@ const cssnext = require('postcss-cssnext')
 const fs = require('fs')
 
 const { getAssetsPath, env, fsExistsSync, chalkConsole } = require('./utils')
-const { externalMap, esDir } = require('../config/rollup.build.config')
+const { esDir } = require('../config/rollup.build.config')
 const aliasConfig = require('../config/alias')
-const { styleDir } = require('../config/index')
+const { styleOutputPath, externalMap } = require('../config/index')
 const banner = require('../config/banner')
 
 function createPlugins({ min } = {}) {
@@ -120,7 +120,7 @@ async function write({ output, file, fileName, format, fullName } = {}) {
       const cssFileName = `${fileName}.css`
       const filePath = isEs(format)
         ? getAssetsPath(`/${es}/${cssFileName}`)
-        : getAssetsPath(`/${styleDir}/${cssFileName}`)
+        : getAssetsPath(`/${styleOutputPath}/${cssFileName}`)
 
       !fsExistsSync(filePath) && fs.writeFileSync(filePath, banner + source.toString())
     } else {
