@@ -53,6 +53,7 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.2.5",
+    "mini-css-extract-plugin": "^0.8.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-nested": "^4.1.2",
     "postcss-simple-vars": "^5.0.2",

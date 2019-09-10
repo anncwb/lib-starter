@@ -13,10 +13,13 @@ const cssnano = require('cssnano')
 const simplevars = require('postcss-simple-vars')
 const nested = require('postcss-nested')
 const cssnext = require('postcss-cssnext')
-const { getAssetsPath, env, fsExistsSync } = require('./utils')
-const { externalMap } = require('../config/rollup.build.config')
-const aliasConfig = require('../config/alias')
 const fs = require('fs')
+
+const { getAssetsPath, env, fsExistsSync, chalkConsole } = require('./utils')
+const { externalMap, esDir } = require('../config/rollup.build.config')
+const aliasConfig = require('../config/alias')
+const { styleDir } = require('../config/index')
+const banner = require('../config/banner')
 
 function createPlugins({ min } = {}) {
   const exclude = 'node_modules/**'
@@ -69,8 +72,24 @@ function createPlugins({ min } = {}) {
  * 打包
  * @param {*} config
  */
-// let buildCount = 0
-async function build(config, index, arr) {
+function build(builds) {
+  let buildCount = 0
+
+  const total = builds.length
+  const next = async () => {
+    chalkConsole.building(buildCount + 1, total)
+    buildEntry(builds[buildCount]).then(() => {
+      buildCount++
+      if (buildCount < total) {
+        next()
+      } else {
+        chalkConsole.success()
+      }
+    })
+  }
+  next()
+}
+async function buildEntry(config) {
   const { output, suffix, input, format, moduleName } = config
 
   const inputOptions = {
@@ -92,22 +111,21 @@ async function build(config, index, arr) {
   const bundle = await rollup.rollup(inputOptions)
   let { output: outputData } = await bundle.generate(outOptions)
 
-  write({ output: outputData, fileName: output, format, fullName, file })
+  await write({ output: outputData, fileName: output, format, fullName, file })
 }
-
-const isEs = (fmt) => fmt === 'es'
+const isEs = (fmt) => fmt === esDir
 async function write({ output, file, fileName, format, fullName } = {}) {
   for (const { isAsset, code, source } of output) {
     if (isAsset) {
       const cssFileName = `${fileName}.css`
       const filePath = isEs(format)
-        ? getAssetsPath(`/es/${cssFileName}`)
-        : getAssetsPath(cssFileName)
+        ? getAssetsPath(`/${es}/${cssFileName}`)
+        : getAssetsPath(`/${styleDir}/${cssFileName}`)
 
-      !fsExistsSync(filePath) && fs.writeFileSync(filePath, source.toString())
+      !fsExistsSync(filePath) && fs.writeFileSync(filePath, banner + source.toString())
     } else {
-      const filePath = isEs(format) ? getAssetsPath(`/es/${fullName}`) : file
-      fs.writeFileSync(filePath, code)
+      const filePath = isEs(format) ? getAssetsPath(`/${es}/${fullName}`) : file
+      fs.writeFileSync(filePath, banner + code)
     }
   }
 }
