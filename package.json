@@ -1,6 +1,6 @@
 {
   "name": "front_lib",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "serve": "cross-env NODE_ENV=development && vue-cli-service serve --copy",
@@ -10,13 +10,13 @@
     "lint": "vue-cli-service lint",
     "lint:prettier": "cross-env prettier --write \"src/**/*.js\" \"src/**/*.vue\" --loglevel warn",
     "lint:css": "cross-env  stylelint 'packages/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'examples/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'src/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'docs/.vuepress/**/*.{html,vue,css,less,scss,styl}' --fix",
-    "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "precommit": "lint-staged",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "pub": "npm run lib && npm publish"
+    "pub": "npm run lib && npm publish",
+    "uv": "cross-env node ./script/update.version.js"
   },
   "dependencies": {},
   "devDependencies": {
@@ -26,7 +26,6 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.0",
     "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-e2e-cypress": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-unit-jest": "^3.11.0",
     "@vue/cli-service": "^3.11.0",
