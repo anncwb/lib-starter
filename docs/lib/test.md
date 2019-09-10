@@ -1,5 +1,6 @@
 <DemoBlock title="测试" desc="基础文档展示">
    <button>test</button>
+   <hello-world></hello-world>
 
   <template slot="codeDesc">
    按钮实体

@@ -58,7 +58,9 @@ module.exports = {
     })
   },
   configureWebpack: (config) => {
-    config.externals = externalMap
+    if (utils.isProduct) {
+      config.externals = externalMap
+    }
   },
   devServer: {
     // 端口号
