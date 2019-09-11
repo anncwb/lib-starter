@@ -1,6 +1,7 @@
 const rollup = require('rollup')
 const resolve = require('rollup-plugin-node-resolve')
 const babel = require('rollup-plugin-babel')
+const image = require('rollup-plugin-img')
 const vue = require('rollup-plugin-vue')
 const commonjs = require('rollup-plugin-commonjs')
 const { terser } = require('rollup-plugin-terser')
@@ -37,6 +38,13 @@ function createPlugins({ min } = {}) {
     babel({
       runtimeHelpers: true,
       // 只编译我们的源代码
+      exclude
+    }),
+    image({
+      hash: false,
+      output: getAssetsPath('/img'), // default the root
+      extensions: /\.(png|jpg|jpeg|gif|svg)$/,
+      limit: 8192, // default 8192(8k)
       exclude
     }),
     postcss({
