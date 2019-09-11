@@ -19,7 +19,7 @@ module.exports = {
       console.log(chalk.green(`=========================================`))
     },
     building: (index, total) => {
-      console.log(chalk.blue(`正在打包第${index}/${total}个库...`))
+      console.log(chalk.blue(`正在打包第${index}/${total}个文件...`))
     }
   },
   fsExistsSync: (_path) => {

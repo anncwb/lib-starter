@@ -1,13 +1,33 @@
 {
-  "name": "front_lib",
-  "version": "0.0.1",
-  "private": true,
+  "name": "vue-lib-starter",
+  "version": "0.0.9",
+  "description": "A library packaging tool based on rollup and vue-cli3",
+  "private": false,
+  "author": "wenbin.chen <anncwb@126.com>",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "keywords": [
+    "vue"
+  ],
+  "files": [
+    "lib",
+    "src",
+    "packages",
+    "types"
+  ],
+  "style": "lib/theme/index.css",
+  "repository": {
+    "type": "git",
+    "url": "x"
+  },
+  "homepage": "x",
+  "bugs": {
+    "url": "x"
+  },
   "scripts": {
     "serve": "cross-env NODE_ENV=development && vue-cli-service serve --copy",
-    "build": "vue-cli-service build",
     "lib:cli": "cross-env rimraf ./lib && node ./build/cli.build.js",
     "lib": "cross-env NODE_ENV=production rimraf ./lib && node ./build/rollup.build",
-    "lint": "vue-cli-service lint",
     "lint:prettier": "cross-env prettier --write \"src/**/*.js\" \"src/**/*.vue\" --loglevel warn",
     "lint:css": "cross-env  stylelint 'packages/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'examples/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'src/**/*.{html,vue,css,less,scss,styl}' --fix && stylelint 'docs/.vuepress/**/*.{html,vue,css,less,scss,styl}' --fix",
     "test:unit": "vue-cli-service test:unit",
@@ -15,7 +35,8 @@
     "docs:build": "vuepress build docs",
     "precommit": "lint-staged",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "pub": "npm run lib && npm publish",
+    "pub:rollup": "npm run uv && npm run lib && npm publish",
+    "pub:cli": "npm run uv && npm run lib:cli && npm publish",
     "uv": "cross-env node ./script/update.version.js"
   },
   "dependencies": {},

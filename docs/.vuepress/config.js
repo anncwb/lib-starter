@@ -1,5 +1,6 @@
+const pkg =require('../../package.json')
 module.exports = {
-  title: 'vue-lib-starter',
+  title: pkg.name,
   description: '快速搭建第三方库',
   base: '/',
   themeConfig: {

@@ -1,19 +1,20 @@
 <template>
-  <div class="file-handle">
-    file-handle
+  <div class="test-module">
+    test-module
   </div>
 </template>
 
 <script>
 console.log('======================')
-console.log('file-handle')
+console.log('test - module')
 console.log('======================')
 export default {
-  name: 'FileHandle'
+  name: 'TestModule',
+  mounted() {}
 }
 </script>
 <style scoped>
-.file-handle {
+.test-module {
   background: blue;
 }
 </style>

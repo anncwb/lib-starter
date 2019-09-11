@@ -20,6 +20,7 @@ const { esDir } = require('../config/rollup.build.config')
 const aliasConfig = require('../config/alias')
 const { styleOutputPath, externalMap } = require('../config/index')
 const banner = require('../config/banner')
+const isEs = (fmt) => fmt === esDir
 
 function createPlugins({ min } = {}) {
   const exclude = 'node_modules/**'
@@ -33,11 +34,11 @@ function createPlugins({ min } = {}) {
     resolve({
       extensions: aliasConfig.resolve
     }),
-    // babel({
-    //   runtimeHelpers: true,
-    //   // 只编译我们的源代码
-    //   exclude
-    // }),
+    babel({
+      runtimeHelpers: true,
+      // 只编译我们的源代码
+      exclude
+    }),
     postcss({
       plugins: [simplevars(), nested(), cssnext({ warnForDuplicates: false }), cssnano()],
       use: [
@@ -78,17 +79,16 @@ function build(builds) {
   const total = builds.length
   const next = async () => {
     chalkConsole.building(buildCount + 1, total)
-    buildEntry(builds[buildCount]).then(() => {
-      buildCount++
-      if (buildCount < total) {
-        next()
-      } else {
-        chalkConsole.success()
-      }
-    })
+    await buildEntry(builds[buildCount])
+    buildCount++
+    buildCount < total ? next() : chalkConsole.success()
   }
   next()
 }
+/**
+ * 打包入口
+ * @param {*} config
+ */
 async function buildEntry(config) {
   const { output, suffix, input, format, moduleName } = config
 
@@ -113,7 +113,10 @@ async function buildEntry(config) {
 
   await write({ output: outputData, fileName: output, format, fullName, file })
 }
-const isEs = (fmt) => fmt === esDir
+/**
+ * 输入js文件
+ * @param {*} param0
+ */
 async function write({ output, file, fileName, format, fullName } = {}) {
   for (const { isAsset, code, source } of output) {
     if (isAsset) {

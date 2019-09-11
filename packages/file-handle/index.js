@@ -1,7 +1,7 @@
-import Test from './src/main.vue'
+import FileHandle from './src/main.vue'
 
-Test.install = (vue) => {
-  vue.component(name, Test)
+FileHandle.install = (vue) => {
+  vue.component(name, FileHandle)
 }
 
-export default Test
+export default FileHandle
