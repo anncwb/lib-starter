@@ -1,7 +1,7 @@
 const { run } = require('runjs')
 const libList = require('../src/lib-list.js')
 const { addons } = require('../config/rollup.build.config.js')
-const { getAssetsPath, chalkConsole, resolve } = require('./utils')
+const { getAssetsPath, chalkConsole, resolve, fsExistsSync } = require('./utils')
 const { styleOutputPath } = require('../config/index')
 const { move, fileDisplay } = require('../script/file-handle')
 const rimraf = require('rimraf')
@@ -30,7 +30,8 @@ rimraf(getAssetsPath('./demo.html'), function() {})
 fs.mkdirSync(getAssetsPath(styleOutputPath))
 // 拷贝css文件到单独目录
 cssFiles.forEach((cssFile) => {
-  move(getAssetsPath(cssFile), getAssetsPath(styleOutputPath + '/' + cssFile))
+  fsExistsSync(getAssetsPath(cssFile)) &&
+    move(getAssetsPath(cssFile), getAssetsPath(styleOutputPath + '/' + cssFile))
 })
 // 重命名common文件
 fileDisplay(getAssetsPath(), (file) => {
