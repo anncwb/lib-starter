@@ -1,4 +1,5 @@
 const utils = require('./build/utils.js')
+const { join } = require('path')
 const aliasConfig = require('./config/alias')
 const { externalMap } = require('./config/index')
 
