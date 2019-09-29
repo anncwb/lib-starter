@@ -29,6 +29,10 @@ module.exports = {
   },
   // 扩展 webpack 配置，使 packages 加入编译
   chainWebpack: (config) => {
+    config.module
+      .rule('js')
+      .include.add(join(process.cwd(), 'src'))
+      .end()
     // 设置别名
     setAlias(config)
     // 关闭利用空余带宽加载文件 提升首页速度

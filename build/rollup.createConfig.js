@@ -136,7 +136,8 @@ async function write({ output, file, fileName, format, fullName } = {}) {
       !fsExistsSync(filePath) && fs.writeFileSync(filePath, banner + source.toString())
     } else {
       const filePath = isEs(format) ? getAssetsPath(`/${es}/${fullName}`) : file
-      fs.writeFileSync(filePath, banner + code)
+      let codeSource = code.replace(/\s?const\s/g, ' var ')
+      fs.writeFileSync(filePath, banner + codeSource)
     }
   }
 }
