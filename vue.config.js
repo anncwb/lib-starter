@@ -50,17 +50,6 @@ module.exports = {
       .tap((options) => {
         return options
       })
-    config.when(utils.isProduct, (config) => {
-      // 开启图片压缩
-      config.module
-        .rule('images')
-        .use('image-webpack-loader')
-        .loader('image-webpack-loader')
-        .options({
-          bypassOnDebug: true
-        })
-        .end()
-    })
   },
   configureWebpack: (config) => {
     if (utils.isProduct) {
